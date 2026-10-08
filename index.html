@@ -3,1301 +3,1854 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FrostLab ❄️</title>
+<title>Frost Motion ❄️ | 50 Web Animations</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ice:#8deaff;
+  --ice2:#48bfff;
+  --deep:#020914;
+  --card:rgba(10,31,55,.72);
+  --line:rgba(150,235,255,.16);
+  --text:#eaffff;
+  --muted:#7895ae;
 }
 
-:root {
-    --ice: #8eeaff;
-    --blue: #3b9cff;
-    --deep: #061329;
-    --night: #020713;
-    --white: #eafaff;
-    --glass: rgba(255,255,255,.08);
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% 0%,#123b60 0,transparent 35%),
+    radial-gradient(circle at 90% 20%,#12355d 0,transparent 32%),
+    linear-gradient(180deg,#020812,#061a2d 50%,#020812);
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
-html {
-    scroll-behavior: smooth;
+/* =========================
+   BACKGROUND
+========================= */
+
+#snow{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:50;
+  overflow:hidden;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 20% 10%, #0b3158 0%, transparent 35%),
-        radial-gradient(circle at 80% 20%, #102d5e 0%, transparent 35%),
-        linear-gradient(#020713, #061329 55%, #020713);
-    color: var(--white);
-    min-height: 100vh;
-    overflow-x: hidden;
+.snowflake{
+  position:absolute;
+  top:-30px;
+  color:#fff;
+  opacity:.55;
+  animation:snowfall linear infinite;
 }
 
-/* ---------------- SNOW ---------------- */
-
-.snow {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 50;
-    overflow: hidden;
+@keyframes snowfall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
 }
 
-.flake {
-    position: absolute;
-    top: -20px;
-    color: white;
-    opacity: .7;
-    animation: snowfall linear infinite;
-    filter: blur(.2px);
+/* =========================
+   NAV
+========================= */
+
+nav{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1150px,92%);
+  z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(2,13,27,.72);
+  backdrop-filter:blur(18px);
 }
 
-@keyframes snowfall {
-    from {
-        transform: translateY(-30px) rotate(0deg);
-    }
-    to {
-        transform: translateY(110vh) rotate(360deg);
-    }
+.logo{
+  font-weight:900;
+  font-size:20px;
 }
 
-/* ---------------- NAV ---------------- */
-
-nav {
-    position: fixed;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(1100px, 92%);
-    padding: 12px 18px;
-    border: 1px solid rgba(150,230,255,.18);
-    background: rgba(3,15,34,.68);
-    backdrop-filter: blur(18px);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 100;
-    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+.logo span{
+  color:var(--ice);
 }
 
-.logo {
-    font-weight: 900;
-    font-size: 20px;
-    letter-spacing: -1px;
+nav a{
+  color:#b9d8eb;
+  text-decoration:none;
+  margin-left:22px;
+  font-size:14px;
 }
 
-.logo span {
-    color: var(--ice);
+nav a:hover{color:white}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:130px 20px 80px;
+  position:relative;
+  overflow:hidden;
 }
 
-nav a {
-    color: #bdefff;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 14px;
+.aurora{
+  position:absolute;
+  width:900px;
+  height:400px;
+  background:
+    radial-gradient(ellipse,#4de5ff22,transparent 65%);
+  filter:blur(35px);
+  animation:aurora 8s ease-in-out infinite alternate;
 }
 
-nav a:hover {
-    color: white;
+@keyframes aurora{
+  from{transform:translate(-180px,-100px) rotate(-8deg)}
+  to{transform:translate(180px,100px) rotate(8deg)}
 }
 
-/* ---------------- HERO ---------------- */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 120px 20px 80px;
-    overflow: hidden;
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:950px;
 }
 
-.aurora {
-    position: absolute;
-    width: 800px;
-    height: 400px;
-    border-radius: 50%;
-    background: linear-gradient(90deg,
-        rgba(0,255,255,.08),
-        rgba(76,120,255,.15),
-        rgba(0,255,180,.08)
-    );
-    filter: blur(80px);
-    animation: aurora 8s ease-in-out infinite alternate;
+.badge{
+  display:inline-block;
+  padding:9px 15px;
+  border:1px solid #8eeaff35;
+  background:#8eeaff0d;
+  border-radius:999px;
+  color:#a9efff;
+  font-size:13px;
+  margin-bottom:25px;
 }
 
-@keyframes aurora {
-    from {
-        transform: translate(-150px,-100px) rotate(-10deg);
-    }
-    to {
-        transform: translate(150px,100px) rotate(10deg);
-    }
+.hero h1{
+  font-size:clamp(55px,11vw,125px);
+  line-height:.84;
+  letter-spacing:-8px;
 }
 
-.hero-content {
-    text-align: center;
-    max-width: 900px;
-    position: relative;
-    z-index: 2;
+.hero h1 span{
+  background:linear-gradient(180deg,#fff,#a9f1ff,#50aaff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.badge {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(130,230,255,.1);
-    border: 1px solid rgba(130,230,255,.25);
-    color: #a9edff;
-    font-size: 13px;
-    margin-bottom: 22px;
+.hero p{
+  color:#8da9c0;
+  max-width:650px;
+  margin:30px auto;
+  line-height:1.6;
+  font-size:18px;
 }
 
-h1 {
-    font-size: clamp(55px, 11vw, 130px);
-    line-height: .85;
-    letter-spacing: -8px;
-    text-shadow:
-        0 0 20px rgba(120,230,255,.35),
-        0 0 70px rgba(40,140,255,.2);
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-h1 span {
-    background: linear-gradient(
-        180deg,
-        #ffffff,
-        #9deaff,
-        #579aff
-    );
-    -webkit-background-clip: text;
-    color: transparent;
+.btn{
+  border:1px solid #8deaff38;
+  background:#8deaff0d;
+  color:white;
+  padding:13px 20px;
+  border-radius:14px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.25s;
 }
 
-.hero p {
-    margin: 30px auto;
-    max-width: 600px;
-    color: #9db8d5;
-    font-size: 18px;
-    line-height: 1.6;
+.btn:hover{
+  transform:translateY(-4px);
+  background:#8deaff18;
 }
 
-/* ---------------- PENGUIN ---------------- */
-
-.penguin {
-    width: 130px;
-    height: 150px;
-    margin: 35px auto 0;
-    position: relative;
-    animation: penguinFloat 3s ease-in-out infinite;
+.primary{
+  background:linear-gradient(135deg,#37caff,#416fff);
+  border:none;
 }
 
-@keyframes penguinFloat {
-    50% {
-        transform: translateY(-18px) rotate(2deg);
-    }
+/* =========================
+   PENGUIN
+========================= */
+
+.penguin{
+  font-size:100px;
+  margin-top:35px;
+  display:inline-block;
+  filter:drop-shadow(0 20px 20px #0008);
+  animation:penguinFloat 3s ease-in-out infinite;
 }
 
-.penguin-body {
-    position: absolute;
-    width: 95px;
-    height: 120px;
-    background: #101b2c;
-    border-radius: 48% 48% 42% 42%;
-    left: 18px;
-    top: 20px;
-    box-shadow: 0 15px 30px rgba(0,0,0,.3);
+@keyframes penguinFloat{
+  50%{transform:translateY(-18px) rotate(3deg)}
 }
 
-.penguin-belly {
-    position: absolute;
-    width: 65px;
-    height: 80px;
-    background: #eafaff;
-    border-radius: 50%;
-    left: 33px;
-    top: 52px;
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  width:min(900px,92%);
+  margin:-40px auto 80px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
-.eye {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-    top: 43px;
-    z-index: 2;
+.stat{
+  text-align:center;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#ffffff07;
+  backdrop-filter:blur(10px);
 }
 
-.eye.left {
-    left: 45px;
+.stat strong{
+  display:block;
+  font-size:34px;
+  color:#a6f0ff;
 }
 
-.eye.right {
-    left: 76px;
+.stat span{
+  color:var(--muted);
+  font-size:13px;
 }
 
-.beak {
-    position: absolute;
-    left: 61px;
-    top: 53px;
-    width: 0;
-    height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    border-top: 14px solid #ffb52e;
-    z-index: 3;
+/* =========================
+   LIBRARY
+========================= */
+
+.library{
+  width:min(1200px,92%);
+  margin:auto;
+  padding-bottom:120px;
 }
 
-.flipper {
-    position: absolute;
-    width: 28px;
-    height: 70px;
-    background: #0c1728;
-    border-radius: 50%;
-    top: 48px;
+.library-title{
+  text-align:center;
+  margin-bottom:45px;
 }
 
-.flipper.left {
-    left: 5px;
-    transform: rotate(25deg);
+.library-title h2{
+  font-size:46px;
+  margin-bottom:10px;
 }
 
-.flipper.right {
-    right: 5px;
-    transform: rotate(-25deg);
+.library-title p{
+  color:var(--muted);
 }
 
-.foot {
-    position: absolute;
-    width: 38px;
-    height: 15px;
-    background: #ffb52e;
-    border-radius: 50%;
-    bottom: 2px;
+.filters{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:30px;
 }
 
-.foot.left {
-    left: 20px;
+.filter{
+  border:1px solid var(--line);
+  background:#ffffff06;
+  color:#a9c8da;
+  padding:9px 14px;
+  border-radius:999px;
+  cursor:pointer;
 }
 
-.foot.right {
-    right: 20px;
+.filter.active,
+.filter:hover{
+  color:white;
+  background:#54d9ff18;
+  border-color:#7deaff55;
 }
 
-/* ---------------- BUTTONS ---------------- */
+/* =========================
+   ANIMATION GRID
+========================= */
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:18px;
 }
 
-.btn {
-    border: 1px solid rgba(140,230,255,.3);
-    background: rgba(100,200,255,.1);
-    color: white;
-    padding: 13px 20px;
-    border-radius: 14px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: .25s;
+.card{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:
+    linear-gradient(145deg,#ffffff09,#ffffff03);
+  overflow:hidden;
+  transition:.3s;
 }
 
-.btn:hover {
-    transform: translateY(-4px);
-    background: rgba(100,220,255,.2);
-    box-shadow: 0 10px 30px rgba(60,180,255,.15);
+.card:hover{
+  transform:translateY(-7px);
+  border-color:#8deaff45;
+  box-shadow:0 20px 50px #0004;
 }
 
-.btn.primary {
-    background: linear-gradient(135deg,#38bfff,#4477ff);
-    border: none;
+.preview{
+  height:190px;
+  margin:10px;
+  border-radius:16px;
+  background:
+    radial-gradient(circle at center,#164e72,transparent 60%),
+    #030c19;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* ---------------- SECTION ---------------- */
-
-section {
-    width: min(1150px, 92%);
-    margin: auto;
-    padding: 100px 0;
+.demo{
+  width:95px;
+  height:55px;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#8deaff,#368cff);
+  color:#032033;
+  font-weight:900;
+  box-shadow:0 10px 30px #42cfff35;
 }
 
-.section-title {
-    font-size: 42px;
-    margin-bottom: 10px;
+.card-body{
+  padding:10px 18px 18px;
 }
 
-.section-sub {
-    color: #7994b2;
-    margin-bottom: 35px;
+.number{
+  color:#5bcfff;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
-/* ---------------- LAB GRID ---------------- */
-
-.lab-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 20px;
+.card h3{
+  margin:5px 0;
+  font-size:19px;
 }
 
-.card {
-    background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.025)
-    );
-    border: 1px solid rgba(160,230,255,.14);
-    border-radius: 24px;
-    padding: 15px;
-    overflow: hidden;
-    transition: .3s;
+.card p{
+  color:#7691aa;
+  font-size:13px;
+  line-height:1.5;
+  min-height:39px;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(150,240,255,.4);
-    box-shadow: 0 20px 50px rgba(0,100,255,.12);
+.card-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
 }
 
-.preview {
-    height: 210px;
-    border-radius: 18px;
-    background:
-        radial-gradient(circle at center,#123d67,transparent 70%),
-        #020a18;
-    overflow: hidden;
-    position: relative;
+.card button{
+  flex:1;
+  padding:9px;
+  border-radius:10px;
+  cursor:pointer;
+  color:#c7f6ff;
+  background:#8deaff0b;
+  border:1px solid #8deaff20;
 }
 
-.card-info {
-    padding: 18px 5px 5px;
+.card button:hover{
+  background:#8deaff18;
 }
 
-.card h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
+/* =========================
+   50 ANIMATIONS
+========================= */
+
+.anim{
+  animation-duration:1.2s;
+  animation-fill-mode:both;
+  animation-iteration-count:infinite;
 }
 
-.card p {
-    color: #7791ad;
-    line-height: 1.5;
-    font-size: 14px;
+/* 01 */
+.a1{animation-name:slideLeft}
+@keyframes slideLeft{
+  0%,100%{transform:translateX(-90px);opacity:0}
+  45%,70%{transform:translateX(0);opacity:1}
 }
 
-.code-btn {
-    margin-top: 15px;
-    background: rgba(130,220,255,.08);
-    border: 1px solid rgba(130,220,255,.2);
-    color: #bcefff;
-    border-radius: 10px;
-    padding: 9px 12px;
-    cursor: pointer;
+/* 02 */
+.a2{animation-name:slideRight}
+@keyframes slideRight{
+  0%,100%{transform:translateX(90px);opacity:0}
+  45%,70%{transform:translateX(0);opacity:1}
 }
 
-/* ---------------- ICE CUBES ---------------- */
+/* 03 */
+.a3{animation-name:slideUp}
+@keyframes slideUp{
+  0%,100%{transform:translateY(70px);opacity:0}
+  45%,70%{transform:translateY(0);opacity:1}
+}
 
-.cube {
-    width: 55px;
-    height: 55px;
-    position: absolute;
-    background: linear-gradient(
-        135deg,
-        rgba(190,245,255,.7),
-        rgba(50,160,255,.15)
-    );
-    border: 1px solid rgba(210,250,255,.8);
+/* 04 */
+.a4{animation-name:slideDown}
+@keyframes slideDown{
+  0%,100%{transform:translateY(-70px);opacity:0}
+  45%,70%{transform:translateY(0);opacity:1}
+}
+
+/* 05 */
+.a5{animation-name:fade}
+@keyframes fade{
+  0%,100%{opacity:0}
+  50%{opacity:1}
+}
+
+/* 06 */
+.a6{animation-name:zoomIn}
+@keyframes zoomIn{
+  0%,100%{transform:scale(.2);opacity:0}
+  50%{transform:scale(1);opacity:1}
+}
+
+/* 07 */
+.a7{animation-name:zoomOut}
+@keyframes zoomOut{
+  0%,100%{transform:scale(1.7);opacity:0}
+  50%{transform:scale(1);opacity:1}
+}
+
+/* 08 */
+.a8{animation-name:bounce}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  30%{transform:translateY(-35px)}
+  55%{transform:translateY(0)}
+  70%{transform:translateY(-12px)}
+}
+
+/* 09 */
+.a9{animation-name:rotate}
+@keyframes rotate{
+  to{transform:rotate(360deg)}
+}
+
+/* 10 */
+.a10{animation-name:flip}
+@keyframes flip{
+  0%,100%{transform:perspective(500px) rotateY(0)}
+  50%{transform:perspective(500px) rotateY(180deg)}
+}
+
+/* 11 */
+.a11{animation-name:shake}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-12px)}
+  40%{transform:translateX(12px)}
+  60%{transform:translateX(-8px)}
+  80%{transform:translateX(8px)}
+}
+
+/* 12 */
+.a12{animation-name:pulse}
+@keyframes pulse{
+  50%{transform:scale(1.18);box-shadow:0 0 45px #66e5ff}
+}
+
+/* 13 */
+.a13{animation-name:wiggle}
+@keyframes wiggle{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-8deg)}
+  75%{transform:rotate(8deg)}
+}
+
+/* 14 */
+.a14{animation-name:swing}
+@keyframes swing{
+  0%,100%{transform:rotate(0)}
+  30%{transform:rotate(15deg)}
+  60%{transform:rotate(-10deg)}
+}
+
+/* 15 */
+.a15{animation-name:blurIn}
+@keyframes blurIn{
+  0%,100%{filter:blur(15px);opacity:0}
+  50%{filter:blur(0);opacity:1}
+}
+
+/* 16 */
+.a16{animation-name:blurOut}
+@keyframes blurOut{
+  0%,60%{filter:blur(0);opacity:1}
+  100%{filter:blur(15px);opacity:0}
+}
+
+/* 17 */
+.a17{animation-name:stretch}
+@keyframes stretch{
+  0%,100%{transform:scaleX(.4)}
+  50%{transform:scaleX(1)}
+}
+
+/* 18 */
+.a18{animation-name:squash}
+@keyframes squash{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.3,.65)}
+}
+
+/* 19 */
+.a19{animation-name:pop}
+@keyframes pop{
+  0%,100%{transform:scale(0)}
+  45%{transform:scale(1.15)}
+  65%{transform:scale(1)}
+}
+
+/* 20 */
+.a20{animation-name:heartbeat}
+@keyframes heartbeat{
+  25%{transform:scale(1.12)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.12)}
+}
+
+/* 21 */
+.a21{animation-name:shakeRotate}
+@keyframes shakeRotate{
+  25%{transform:rotate(-8deg) translateX(-8px)}
+  50%{transform:rotate(8deg) translateX(8px)}
+  75%{transform:rotate(-5deg)}
+}
+
+/* 22 */
+.a22{animation-name:flipX}
+@keyframes flipX{
+  50%{transform:perspective(500px) rotateX(180deg)}
+}
+
+/* 23 */
+.a23{animation-name:flip3d}
+@keyframes flip3d{
+  50%{transform:perspective(500px) rotateX(180deg) rotateY(180deg)}
+}
+
+/* 24 */
+.a24{animation-name:drift}
+@keyframes drift{
+  0%,100%{transform:translate(-30px,10px)}
+  50%{transform:translate(30px,-10px)}
+}
+
+/* 25 */
+.a25{animation-name:float}
+@keyframes float{
+  50%{transform:translateY(-25px)}
+}
+
+/* 26 */
+.a26{animation-name:orbit}
+@keyframes orbit{
+  from{transform:rotate(0) translateX(35px) rotate(0)}
+  to{transform:rotate(360deg) translateX(35px) rotate(-360deg)}
+}
+
+/* 27 */
+.a27{animation-name:spinSlow}
+@keyframes spinSlow{
+  to{transform:rotate(360deg)}
+}
+
+/* 28 */
+.a28{animation-name:spinReverse}
+@keyframes spinReverse{
+  to{transform:rotate(-360deg)}
+}
+
+/* 29 */
+.a29{animation-name:skew}
+@keyframes skew{
+  0%,100%{transform:skew(0)}
+  50%{transform:skew(-15deg,8deg)}
+}
+
+/* 30 */
+.a30{animation-name:wave}
+@keyframes wave{
+  0%,100%{transform:translateY(0)}
+  25%{transform:translateY(-15px) rotate(-4deg)}
+  75%{transform:translateY(15px) rotate(4deg)}
+}
+
+/* 31 */
+.a31{animation-name:glow}
+@keyframes glow{
+  50%{
     box-shadow:
-        inset 0 0 20px rgba(255,255,255,.25),
-        0 0 25px rgba(60,190,255,.25);
-    transform: rotate(25deg);
-    animation: cubeFloat 5s ease-in-out infinite;
+      0 0 15px #8deaff,
+      0 0 50px #3cbfff;
+  }
 }
 
-.cube:nth-child(2) {
-    width: 35px;
-    height: 35px;
-    left: 70%;
-    top: 20%;
-    animation-delay: -2s;
+/* 32 */
+.a32{animation-name:colorPulse}
+@keyframes colorPulse{
+  50%{
+    filter:hue-rotate(100deg);
+  }
 }
 
-.cube:nth-child(3) {
-    width: 70px;
-    height: 70px;
-    left: 20%;
-    top: 60%;
-    animation-delay: -4s;
+/* 33 */
+.a33{animation-name:flash}
+@keyframes flash{
+  0%,100%{opacity:1}
+  50%{opacity:.15}
 }
 
-.cube:nth-child(4) {
-    width: 25px;
-    height: 25px;
-    left: 55%;
-    top: 70%;
-    animation-delay: -1s;
+/* 34 */
+.a34{animation-name:blink}
+@keyframes blink{
+  0%,45%{opacity:1}
+  46%,55%{opacity:0}
+  56%,100%{opacity:1}
 }
 
-@keyframes cubeFloat {
-    0%,100% {
-        transform: translateY(0) rotate(25deg);
-    }
-    50% {
-        transform: translateY(-35px) rotate(80deg);
-    }
+/* 35 */
+.a35{animation-name:rubber}
+@keyframes rubber{
+  30%{transform:scaleX(1.25) scaleY(.75)}
+  40%{transform:scaleX(.75) scaleY(1.25)}
+  50%{transform:scaleX(1.15) scaleY(.85)}
 }
 
-/* ---------------- WAVE ---------------- */
-
-.wave {
-    position: absolute;
-    width: 200%;
-    height: 100px;
-    left: -50%;
-    bottom: -20px;
-    border-radius: 50%;
-    border-top: 4px solid #72dcff;
-    animation: waveMove 4s linear infinite;
-    box-shadow: 0 -10px 30px rgba(50,200,255,.15);
+/* 36 */
+.a36{animation-name:jackIn}
+@keyframes jackIn{
+  0%,100%{opacity:0;transform:scale(.1) rotate(30deg)}
+  50%{opacity:1;transform:scale(1) rotate(0)}
 }
 
-.wave.two {
-    bottom: 20px;
-    opacity: .4;
-    animation-duration: 6s;
+/* 37 */
+.a37{animation-name:backIn}
+@keyframes backIn{
+  0%,100%{opacity:0;transform:scale(1.7) translateX(-100px)}
+  50%{opacity:1;transform:scale(1) translateX(0)}
 }
 
-@keyframes waveMove {
-    to {
-        transform: translateX(30%);
-    }
+/* 38 */
+.a38{animation-name:roll}
+@keyframes roll{
+  0%,100%{transform:translateX(-55px) rotate(-180deg)}
+  50%{transform:translateX(55px) rotate(180deg)}
 }
 
-/* ---------------- CRYSTALS ---------------- */
-
-.crystals {
-    position: absolute;
-    inset: 0;
+/* 39 */
+.a39{animation-name:door}
+@keyframes door{
+  0%,100%{transform:perspective(500px) rotateY(-90deg);transform-origin:left}
+  50%{transform:perspective(500px) rotateY(0)}
 }
 
-.crystal {
-    position: absolute;
-    width: 15px;
-    height: 45px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        #b7f5ff,
-        transparent
-    );
-    clip-path: polygon(50% 0,100% 40%,70% 100%,30% 100%,0 40%);
-    animation: crystalSpin 4s linear infinite;
+/* 40 */
+.a40{animation-name:pendulum}
+@keyframes pendulum{
+  0%,100%{transform:rotate(-18deg);transform-origin:top}
+  50%{transform:rotate(18deg);transform-origin:top}
 }
 
-@keyframes crystalSpin {
-    0% {
-        transform: rotate(0deg) translateY(0);
-        opacity: .3;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(360deg) translateY(-30px);
-        opacity: .2;
-    }
+/* 41 */
+.a41{animation-name:elastic}
+@keyframes elastic{
+  0%,100%{transform:scaleX(1)}
+  30%{transform:scaleX(1.3)}
+  55%{transform:scaleX(.8)}
+  75%{transform:scaleX(1.1)}
 }
 
-/* ---------------- PARTICLES ---------------- */
-
-.particle {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #9deeff;
-    box-shadow: 0 0 12px #66dfff;
-    animation: particleMove 4s infinite ease-in-out;
+/* 42 */
+.a42{animation-name:reveal}
+@keyframes reveal{
+  0%,100%{clip-path:inset(0 100% 0 0)}
+  50%{clip-path:inset(0 0 0 0)}
 }
 
-@keyframes particleMove {
-    50% {
-        transform: translate(
-            calc(var(--x) * 1px),
-            calc(var(--y) * 1px)
-        );
-    }
+/* 43 */
+.a43{animation-name:wipe}
+@keyframes wipe{
+  0%,100%{clip-path:inset(100% 0 0 0)}
+  50%{clip-path:inset(0 0 0 0)}
 }
 
-/* ---------------- BUBBLES ---------------- */
-
-.bubble {
-    position: absolute;
-    bottom: -40px;
-    border: 1px solid rgba(180,240,255,.5);
-    border-radius: 50%;
-    animation: bubbleUp linear infinite;
+/* 44 */
+.a44{animation-name:neon}
+@keyframes neon{
+  50%{
+    text-shadow:
+      0 0 5px white,
+      0 0 15px #4de1ff,
+      0 0 35px #258dff;
+  }
 }
 
-@keyframes bubbleUp {
-    to {
-        transform: translateY(-260px);
-        opacity: 0;
-    }
+/* 45 */
+.a45{animation-name:glitch}
+@keyframes glitch{
+  0%,100%{transform:translate(0)}
+  20%{transform:translate(-4px,2px)}
+  40%{transform:translate(4px,-2px)}
+  60%{transform:translate(-2px,-3px)}
+  80%{transform:translate(3px,2px)}
 }
 
-/* ---------------- PENGUIN PARADE ---------------- */
-
-.parade {
-    position: absolute;
-    bottom: 15px;
-    display: flex;
-    gap: 15px;
-    animation: parade 9s linear infinite;
+/* 46 */
+.a46{animation-name:drop}
+@keyframes drop{
+  0%,100%{transform:translateY(-100px);opacity:0}
+  50%{transform:translateY(0);opacity:1}
 }
 
-.mini-penguin {
-    font-size: 48px;
-    filter: drop-shadow(0 8px 10px rgba(0,0,0,.3));
-    animation: waddling .7s infinite alternate;
+/* 47 */
+.a47{animation-name:rise}
+@keyframes rise{
+  0%,100%{transform:translateY(100px);opacity:0}
+  50%{transform:translateY(0);opacity:1}
 }
 
-.mini-penguin:nth-child(2) {
-    animation-delay: -.2s;
+/* 48 */
+.a48{animation-name:spiral}
+@keyframes spiral{
+  0%{transform:rotate(0) translateX(0)}
+  50%{transform:rotate(180deg) translateX(30px)}
+  100%{transform:rotate(360deg) translateX(0)}
 }
 
-.mini-penguin:nth-child(3) {
-    animation-delay: -.4s;
+/* 49 */
+.a49{animation-name:pendulum2}
+@keyframes pendulum2{
+  0%,100%{transform:rotate(-25deg)}
+  50%{transform:rotate(25deg)}
 }
 
-@keyframes parade {
-    from {
-        left: -220px;
-    }
-    to {
-        left: 100%;
-    }
+/* 50 */
+.a50{animation-name:iceFreeze}
+@keyframes iceFreeze{
+  0%{
+    transform:scale(.7) rotate(-8deg);
+    opacity:0;
+    filter:blur(8px);
+  }
+  45%{
+    transform:scale(1.1) rotate(3deg);
+    opacity:1;
+    filter:blur(0);
+  }
+  70%{
+    transform:scale(1) rotate(0);
+  }
+  100%{
+    transform:scale(.95);
+  }
 }
 
-@keyframes waddling {
-    from {
-        transform: rotate(-7deg);
-    }
-    to {
-        transform: rotate(7deg);
-    }
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#000b;
+  backdrop-filter:blur(12px);
 }
 
-/* ---------------- CURSOR ---------------- */
+.modal.open{display:flex}
 
-.cursor-ice {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    pointer-events: none;
-    border-radius: 50%;
-    background: #a8efff;
-    box-shadow: 0 0 20px #55dfff;
-    z-index: 999;
+.modal-box{
+  width:min(750px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#06192c;
+  border:1px solid #8deaff35;
+  border-radius:24px;
+  padding:25px;
+  box-shadow:0 30px 100px #000;
 }
 
-/* ---------------- FOOTER ---------------- */
-
-footer {
-    text-align: center;
-    padding: 60px 20px;
-    color: #66809d;
-    border-top: 1px solid rgba(150,220,255,.08);
+.modal-close{
+  float:right;
+  border:0;
+  background:none;
+  color:white;
+  font-size:28px;
+  cursor:pointer;
 }
 
-footer span {
-    color: #91eaff;
+.modal-demo{
+  height:180px;
+  margin:20px 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:18px;
+  background:
+    radial-gradient(circle,#164b6d,transparent 65%),
+    #020914;
+  overflow:hidden;
 }
 
-/* ---------------- MODAL ---------------- */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,5,15,.75);
-    backdrop-filter: blur(15px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-    padding: 20px;
+pre{
+  white-space:pre-wrap;
+  overflow:auto;
+  background:#020812;
+  padding:18px;
+  border-radius:14px;
+  color:#a8efff;
+  font-size:12px;
+  line-height:1.6;
 }
 
-.modal.active {
-    display: flex;
+.copy{
+  margin-top:12px;
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#39caff,#426fff);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.modal-box {
-    width: min(700px,100%);
-    background: #07182c;
-    border: 1px solid rgba(150,230,255,.25);
-    border-radius: 25px;
-    padding: 25px;
-    box-shadow: 0 30px 100px rgba(0,0,0,.5);
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:70px 20px;
+  border-top:1px solid var(--line);
+  color:#617e98;
 }
 
-.modal-box h2 {
-    margin-bottom: 15px;
-}
+footer strong{color:#9eeeff}
 
-pre {
-    margin-top: 15px;
-    padding: 15px;
-    background: #020814;
-    border-radius: 15px;
-    overflow: auto;
-    max-height: 300px;
-    color: #a9edff;
-    font-size: 12px;
-}
-
-.close {
-    float: right;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-/* ---------------- MOBILE ---------------- */
-
-@media(max-width:600px) {
-    nav {
-        padding: 12px;
-    }
-
-    nav a {
-        display: none;
-    }
-
-    h1 {
-        letter-spacing: -4px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    section {
-        padding: 70px 0;
-    }
-
-    .section-title {
-        font-size: 32px;
-    }
+@media(max-width:650px){
+  nav a{display:none}
+  .hero h1{letter-spacing:-4px}
+  .stats{grid-template-columns:1fr}
+  .library-title h2{font-size:34px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="snow" id="snow"></div>
-
-<div class="cursor-ice" id="cursor"></div>
+<div id="snow"></div>
 
 <nav>
-    <div class="logo">FROST<span>LAB</span> ❄️</div>
-
-    <div>
-        <a href="#lab">Animations</a>
-        <a href="#about">About</a>
-    </div>
+  <div class="logo">FROST<span>MOTION</span> ❄️</div>
+  <div>
+    <a href="#animations">Animations</a>
+    <a href="#about">About</a>
+  </div>
 </nav>
-
-<!-- HERO -->
 
 <header class="hero">
 
-    <div class="aurora"></div>
+  <div class="aurora"></div>
 
-    <div class="hero-content">
+  <div class="hero-content">
 
-        <div class="badge">
-            ❄️ THE INTERNET'S COLDEST PLAYGROUND
-        </div>
-
-        <h1>
-            <span>FROST</span><br>
-            LAB
-        </h1>
-
-        <p>
-            A collection of icy interactive animations,
-            experiments and tiny pieces of frozen internet magic.
-        </p>
-
-        <div class="buttons">
-            <a class="btn primary" href="#lab">
-                Explore the Lab ❄️
-            </a>
-
-            <a class="btn" href="#about">
-                What is this?
-            </a>
-        </div>
-
-        <div class="penguin">
-
-            <div class="flipper left"></div>
-            <div class="flipper right"></div>
-
-            <div class="penguin-body"></div>
-            <div class="penguin-belly"></div>
-
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-
-            <div class="beak"></div>
-
-            <div class="foot left"></div>
-            <div class="foot right"></div>
-
-        </div>
-
+    <div class="badge">
+      🐧 WEB ANIMATION LIBRARY
     </div>
-</header>
 
-<!-- LAB -->
+    <h1>
+      <span>50</span><br>
+      ANIMATIONS
+    </h1>
 
-<section id="lab">
-
-    <h2 class="section-title">Frozen Experiments 🧊</h2>
-
-    <p class="section-sub">
-        Hover them. Click them. Stare at them for an unreasonable amount of time.
+    <p>
+      50 ready-to-use web animations for your next website.
+      Slide them. Fade them. Flip them. Bounce them.
+      Make your website move. ❄️
     </p>
 
-    <div class="lab-grid">
+    <div class="hero-buttons">
+      <a href="#animations" class="btn primary">
+        Explore all 50 ❄️
+      </a>
 
-        <!-- ICE CUBES -->
-
-        <div class="card">
-
-            <div class="preview" id="icePreview">
-
-                <div class="cube" style="left:20%;top:20%;"></div>
-                <div class="cube"></div>
-                <div class="cube"></div>
-                <div class="cube"></div>
-
-            </div>
-
-            <div class="card-info">
-
-                <h3>Floating Ice</h3>
-
-                <p>
-                    Weightless ice cubes drifting through a frozen void.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Floating Ice', iceCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- WAVE -->
-
-        <div class="card">
-
-            <div class="preview">
-
-                <div class="wave"></div>
-                <div class="wave two"></div>
-
-            </div>
-
-            <div class="card-info">
-
-                <h3>Frozen Waves</h3>
-
-                <p>
-                    Endless icy waves sliding through the darkness.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Frozen Waves', waveCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CRYSTALS -->
-
-        <div class="card">
-
-            <div class="preview crystals" id="crystalPreview"></div>
-
-            <div class="card-info">
-
-                <h3>Ice Crystals</h3>
-
-                <p>
-                    Glowing crystals slowly rotating in frozen space.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Ice Crystals', crystalCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PARTICLES -->
-
-        <div class="card">
-
-            <div class="preview" id="particles"></div>
-
-            <div class="card-info">
-
-                <h3>Snow Particles</h3>
-
-                <p>
-                    Tiny glowing snow particles floating through the air.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Snow Particles', particleCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- BUBBLES -->
-
-        <div class="card">
-
-            <div class="preview" id="bubbles"></div>
-
-            <div class="card-info">
-
-                <h3>Frozen Bubbles</h3>
-
-                <p>
-                    Bubbles rising from a mysterious frozen lake.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Frozen Bubbles', bubbleCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PENGUINS -->
-
-        <div class="card">
-
-            <div class="preview" style="overflow:hidden;">
-
-                <div class="parade">
-
-                    <div class="mini-penguin">🐧</div>
-                    <div class="mini-penguin">🐧</div>
-                    <div class="mini-penguin">🐧</div>
-                    <div class="mini-penguin">🐧</div>
-
-                </div>
-
-            </div>
-
-            <div class="card-info">
-
-                <h3>Penguin Parade</h3>
-
-                <p>
-                    A tiny army of penguins has escaped the lab.
-                </p>
-
-                <button class="code-btn"
-                    onclick="showCode('Penguin Parade', penguinCode)">
-                    View Code
-                </button>
-
-            </div>
-
-        </div>
-
+      <a href="#about" class="btn">
+        How it works
+      </a>
     </div>
+
+    <div class="penguin">🐧</div>
+
+  </div>
+</header>
+
+<section class="stats">
+
+  <div class="stat">
+    <strong>50</strong>
+    <span>ANIMATIONS</span>
+  </div>
+
+  <div class="stat">
+    <strong>1</strong>
+    <span>HTML FILE</span>
+  </div>
+
+  <div class="stat">
+    <strong>∞</strong>
+    <span>WAYS TO USE THEM</span>
+  </div>
 
 </section>
 
-<!-- ABOUT -->
+<main class="library" id="animations">
 
-<section id="about">
+  <div class="library-title">
+    <h2>❄️ The Animation Vault</h2>
+    <p>Exactly 50 animations. No filler. Just movement.</p>
+  </div>
 
-    <h2 class="section-title">Built for web creators 🧑‍💻</h2>
+  <div class="filters">
+    <button class="filter active" data-filter="all">All 50</button>
+    <button class="filter" data-filter="entrance">Entrance</button>
+    <button class="filter" data-filter="motion">Motion</button>
+    <button class="filter" data-filter="3d">3D</button>
+    <button class="filter" data-filter="effects">Effects</button>
+  </div>
 
-    <p class="section-sub">
-        See something cool? Open its code, copy the idea,
-        and put it into your own website.
+  <div class="grid" id="grid"></div>
+
+</main>
+
+<section id="about" class="library">
+
+  <div class="library-title">
+    <h2>Built for web creators 🧑‍💻</h2>
+    <p>
+      Every animation has a live preview and reusable CSS.
+    </p>
+  </div>
+
+  <div class="card" style="padding:25px">
+
+    <h3>🧊 How to use one</h3>
+
+    <p style="color:#819ab4;line-height:1.8;margin-top:12px">
+      Find an animation you like → click
+      <b>View Code</b> → copy the CSS → add the
+      animation class to your element.
+      <br><br>
+      You can change the speed, direction, colors,
+      distance and basically anything you want.
     </p>
 
-    <div class="card">
-
-        <h3>❄️ Why FrostLab?</h3>
-
-        <p style="margin-top:12px;color:#819ab4;line-height:1.7;">
-
-            Websites don't have to sit there like a brick.
-            FrostLab is a little playground for animations,
-            interactions and visual experiments that can be
-            reused in your own projects.
-
-            <br><br>
-
-            Everything here is made with ordinary
-            HTML, CSS and JavaScript.
-
-        </p>
-
-    </div>
+  </div>
 
 </section>
 
 <footer>
-    Made somewhere below freezing ❄️
-    <br>
-    <span>FROSTLAB</span> • 2026
+  Frozen pixels, warm code. ❄️
+  <br><br>
+  <strong>FROST MOTION</strong> • 50 ANIMATIONS
 </footer>
-
-<!-- MODAL -->
 
 <div class="modal" id="modal">
 
-    <div class="modal-box">
+  <div class="modal-box">
 
-        <button class="close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="closeModal()">×</button>
 
-        <h2 id="modalTitle"></h2>
+    <div id="modalNumber" class="number"></div>
 
-        <p style="color:#7894b1;">
-            Copy this little animation and experiment with it.
-        </p>
+    <h2 id="modalTitle"></h2>
 
-        <pre id="codeBox"></pre>
-
-        <button class="btn primary"
-            onclick="copyCode()"
-            style="margin-top:15px;">
-            Copy Code 📋
-        </button>
-
+    <div class="modal-demo">
+      <div id="modalDemo" class="demo"></div>
     </div>
+
+    <pre id="code"></pre>
+
+    <button class="copy" onclick="copyCode()">
+      📋 Copy Code
+    </button>
+
+  </div>
 
 </div>
 
 <script>
 
-/* ---------------- SNOW ---------------- */
+/* =========================
+   SNOW
+========================= */
 
-const snow = document.getElementById("snow");
+const snow=document.getElementById("snow");
 
-for(let i=0;i<90;i++){
+for(let i=0;i<100;i++){
 
-    const flake = document.createElement("div");
+  const s=document.createElement("div");
 
-    flake.className = "flake";
+  s.className="snowflake";
+  s.textContent=Math.random()>.5?"❄":"·";
 
-    flake.textContent = Math.random() > .5 ? "❄" : "·";
+  s.style.left=Math.random()*100+"%";
+  s.style.fontSize=(Math.random()*13+6)+"px";
+  s.style.animationDuration=(Math.random()*8+5)+"s";
+  s.style.animationDelay=(-Math.random()*12)+"s";
 
-    flake.style.left = Math.random()*100 + "%";
-    flake.style.fontSize = (Math.random()*12+6)+"px";
-    flake.style.animationDuration = (Math.random()*8+5)+"s";
-    flake.style.animationDelay = (-Math.random()*10)+"s";
-
-    snow.appendChild(flake);
+  snow.appendChild(s);
 }
 
-/* ---------------- CRYSTALS ---------------- */
+/* =========================
+   ANIMATION DATA
+========================= */
 
-const crystalBox =
-document.getElementById("crystalPreview");
+const animations=[
 
-for(let i=0;i<12;i++){
+["Slide Left","Slides into view from the left.","a1","entrance"],
+["Slide Right","Slides into view from the right.","a2","entrance"],
+["Slide Up","Rises smoothly into view.","a3","entrance"],
+["Slide Down","Drops into view from above.","a4","entrance"],
+["Fade In","A clean opacity reveal.","a5","entrance"],
+["Zoom In","Starts tiny and grows into place.","a6","entrance"],
+["Zoom Out","Starts large and settles down.","a7","entrance"],
+["Bounce","A playful bouncing entrance.","a8","motion"],
+["Rotate","A smooth continuous rotation.","a9","motion"],
+["Flip Y","Flips around the vertical axis.","a10","3d"],
+["Shake","Quick horizontal shaking motion.","a11","motion"],
+["Pulse","Expands and contracts repeatedly.","a12","motion"],
+["Wiggle","Small playful rotation.","a13","motion"],
+["Swing","Swings from side to side.","a14","motion"],
+["Blur In","Comes into focus from blur.","a15","effects"],
+["Blur Out","Slowly disappears into blur.","a16","effects"],
+["Stretch","Stretches horizontally.","a17","motion"],
+["Squash","Squashes and expands.","a18","motion"],
+["Pop","Pops into existence.","a19","entrance"],
+["Heartbeat","A rhythmic heartbeat effect.","a20","motion"],
+["Shake Rotate","Shakes while rotating.","a21","motion"],
+["Flip X","Flips around the horizontal axis.","a22","3d"],
+["3D Flip","Flips across two axes.","a23","3d"],
+["Drift","Slow floating movement.","a24","motion"],
+["Float","Gentle vertical floating.","a25","motion"],
+["Orbit","Travels around an invisible point.","a26","3d"],
+["Slow Spin","Relaxed continuous rotation.","a27","motion"],
+["Reverse Spin","Rotates in the opposite direction.","a28","motion"],
+["Skew","Tilts and bends sideways.","a29","motion"],
+["Wave","Moves up and down like a wave.","a30","motion"],
+["Glow","Pulsing icy glow.","a31","effects"],
+["Color Shift","Cycles through color tones.","a32","effects"],
+["Flash","Quick brightness flash.","a33","effects"],
+["Blink","Blinking visibility effect.","a34","effects"],
+["Rubber","Elastic rubber-like movement.","a35","motion"],
+["Jack In","Spins and grows into view.","a36","entrance"],
+["Back In","Comes forward from far away.","a37","entrance"],
+["Roll","Rolls across the screen.","a38","motion"],
+["Door Flip","Opens like a door.","a39","3d"],
+["Pendulum","Swings from an attachment point.","a40","motion"],
+["Elastic","Stretches and snaps back.","a41","motion"],
+["Reveal","Reveals through a horizontal mask.","a42","effects"],
+["Wipe","Reveals vertically.","a43","effects"],
+["Neon","Pulsing neon glow effect.","a44","effects"],
+["Glitch","Digital glitch movement.","a45","effects"],
+["Drop","Drops down into place.","a46","entrance"],
+["Rise","Rises upward into place.","a47","entrance"],
+["Spiral","Moves in a tiny spiral.","a48","motion"],
+["Pendulum 2","A stronger pendulum swing.","a49","motion"],
+["Ice Freeze","A frosty dramatic entrance.","a50","entrance"]
 
-    const c=document.createElement("div");
+];
 
-    c.className="crystal";
+/* =========================
+   CSS CODE
+========================= */
 
-    c.style.left=Math.random()*95+"%";
-    c.style.top=Math.random()*90+"%";
-    c.style.animationDelay=(-Math.random()*5)+"s";
-    c.style.transform=`scale(${Math.random()+.5})`;
+const codeMap={
 
-    crystalBox.appendChild(c);
+a1:`@keyframes slideLeft {
+  from {
+    transform: translateX(-90px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-/* ---------------- PARTICLES ---------------- */
+.element {
+  animation: slideLeft 1s ease;
+}`,
 
-const particleBox =
-document.getElementById("particles");
+a2:`@keyframes slideRight {
+  from {
+    transform: translateX(90px);
+    opacity: 0;
+  }
 
-for(let i=0;i<35;i++){
-
-    const p=document.createElement("div");
-
-    p.className="particle";
-
-    p.style.left=Math.random()*100+"%";
-    p.style.top=Math.random()*100+"%";
-
-    p.style.setProperty("--x",
-        Math.random()*100-50);
-
-    p.style.setProperty("--y",
-        Math.random()*100-50);
-
-    p.style.animationDelay =
-        (-Math.random()*4)+"s";
-
-    particleBox.appendChild(p);
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-/* ---------------- BUBBLES ---------------- */
+.element {
+  animation: slideRight 1s ease;
+}`,
 
-const bubbleBox =
-document.getElementById("bubbles");
+a3:`@keyframes slideUp {
+  from {
+    transform: translateY(70px);
+    opacity: 0;
+  }
 
-function makeBubble(){
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}`,
 
-    const b=document.createElement("div");
+a4:`@keyframes slideDown {
+  from {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
 
-    b.className="bubble";
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}`,
 
-    const size=Math.random()*30+10;
-
-    b.style.width=size+"px";
-    b.style.height=size+"px";
-    b.style.left=Math.random()*100+"%";
-    b.style.animationDuration=
-        (Math.random()*4+3)+"s";
-
-    bubbleBox.appendChild(b);
-
-    setTimeout(()=>{
-        b.remove();
-    },7000);
+a5:`@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-setInterval(makeBubble,450);
+.element {
+  animation: fadeIn 1s ease;
+}`,
 
-/* ---------------- CURSOR ---------------- */
+a6:`@keyframes zoomIn {
+  from {
+    transform: scale(.2);
+    opacity: 0;
+  }
 
-const cursor =
-document.getElementById("cursor");
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}`,
 
-document.addEventListener("mousemove",(e)=>{
+a7:`@keyframes zoomOut {
+  from {
+    transform: scale(1.7);
+    opacity: 0;
+  }
 
-    cursor.style.left =
-        e.clientX-6+"px";
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}`,
 
-    cursor.style.top =
-        e.clientY-6+"px";
+a8:`@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  30% { transform: translateY(-35px); }
+  55% { transform: translateY(0); }
+  70% { transform: translateY(-12px); }
+}
+
+.element {
+  animation: bounce 1.2s infinite;
+}`,
+
+a9:`@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.element {
+  animation: rotate 2s linear infinite;
+}`,
+
+a10:`@keyframes flipY {
+  50% {
+    transform:
+      perspective(500px)
+      rotateY(180deg);
+  }
+}`,
+
+a11:`@keyframes shake {
+  20% { transform: translateX(-12px); }
+  40% { transform: translateX(12px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+.element {
+  animation: shake .7s;
+}`,
+
+a12:`@keyframes pulse {
+  50% {
+    transform: scale(1.18);
+    box-shadow:
+      0 0 45px #66e5ff;
+  }
+}
+
+.element {
+  animation: pulse 1s infinite;
+}`,
+
+a13:`@keyframes wiggle {
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.element {
+  animation: wiggle 1s infinite;
+}`,
+
+a14:`@keyframes swing {
+  30% { transform: rotate(15deg); }
+  60% { transform: rotate(-10deg); }
+}
+
+.element {
+  transform-origin: top;
+  animation: swing 1.5s infinite;
+}`,
+
+a15:`@keyframes blurIn {
+  from {
+    filter: blur(15px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}`,
+
+a16:`@keyframes blurOut {
+  from {
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  to {
+    filter: blur(15px);
+    opacity: 0;
+  }
+}`,
+
+a17:`@keyframes stretch {
+  0%,100% {
+    transform: scaleX(.4);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+}`,
+
+a18:`@keyframes squash {
+  50% {
+    transform: scale(1.3,.65);
+  }
+}`,
+
+a19:`@keyframes pop {
+  0% { transform: scale(0); }
+  45% { transform: scale(1.15); }
+  65% { transform: scale(1); }
+}`,
+
+a20:`@keyframes heartbeat {
+  25%,60% {
+    transform: scale(1.12);
+  }
+
+  40%,100% {
+    transform: scale(1);
+  }
+}`,
+
+a21:`@keyframes shakeRotate {
+  25% {
+    transform:
+      rotate(-8deg)
+      translateX(-8px);
+  }
+
+  50% {
+    transform:
+      rotate(8deg)
+      translateX(8px);
+  }
+}`,
+
+a22:`@keyframes flipX {
+  50% {
+    transform:
+      perspective(500px)
+      rotateX(180deg);
+  }
+}`,
+
+a23:`@keyframes flip3D {
+  50% {
+    transform:
+      perspective(500px)
+      rotateX(180deg)
+      rotateY(180deg);
+  }
+}`,
+
+a24:`@keyframes drift {
+  0%,100% {
+    transform:
+      translate(-30px,10px);
+  }
+
+  50% {
+    transform:
+      translate(30px,-10px);
+  }
+}`,
+
+a25:`@keyframes float {
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+.element {
+  animation: float 3s ease-in-out infinite;
+}`,
+
+a26:`@keyframes orbit {
+  to {
+    transform:
+      rotate(360deg)
+      translateX(35px)
+      rotate(-360deg);
+  }
+}`,
+
+a27:`@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.element {
+  animation: spin 4s linear infinite;
+}`,
+
+a28:`@keyframes reverseSpin {
+  to {
+    transform: rotate(-360deg);
+  }
+}`,
+
+a29:`@keyframes skew {
+  50% {
+    transform:
+      skew(-15deg,8deg);
+  }
+}`,
+
+a30:`@keyframes wave {
+  25% {
+    transform:
+      translateY(-15px)
+      rotate(-4deg);
+  }
+
+  75% {
+    transform:
+      translateY(15px)
+      rotate(4deg);
+  }
+}`,
+
+a31:`@keyframes glow {
+  50% {
+    box-shadow:
+      0 0 15px #8deaff,
+      0 0 50px #3cbfff;
+  }
+}`,
+
+a32:`@keyframes colorShift {
+  to {
+    filter: hue-rotate(100deg);
+  }
+}`,
+
+a33:`@keyframes flash {
+  50% { opacity: .15; }
+}
+
+.element {
+  animation: flash .8s infinite;
+}`,
+
+a34:`@keyframes blink {
+  45%,55% {
+    opacity: 0;
+  }
+}
+
+.element {
+  animation: blink 1.5s infinite;
+}`,
+
+a35:`@keyframes rubber {
+  30% {
+    transform:
+      scaleX(1.25)
+      scaleY(.75);
+  }
+
+  40% {
+    transform:
+      scaleX(.75)
+      scaleY(1.25);
+  }
+
+  50% {
+    transform:
+      scaleX(1.15)
+      scaleY(.85);
+  }
+}`,
+
+a36:`@keyframes jackIn {
+  from {
+    opacity: 0;
+    transform:
+      scale(.1)
+      rotate(30deg);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1)
+      rotate(0);
+  }
+}`,
+
+a37:`@keyframes backIn {
+  from {
+    opacity: 0;
+    transform:
+      scale(1.7)
+      translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateX(0);
+  }
+}`,
+
+a38:`@keyframes roll {
+  from {
+    transform:
+      translateX(-55px)
+      rotate(-180deg);
+  }
+
+  to {
+    transform:
+      translateX(55px)
+      rotate(180deg);
+  }
+}`,
+
+a39:`@keyframes door {
+  from {
+    transform:
+      perspective(500px)
+      rotateY(-90deg);
+    transform-origin:left;
+  }
+
+  to {
+    transform:
+      perspective(500px)
+      rotateY(0);
+  }
+}`,
+
+a40:`@keyframes pendulum {
+  0%,100% {
+    transform: rotate(-18deg);
+    transform-origin: top;
+  }
+
+  50% {
+    transform: rotate(18deg);
+    transform-origin: top;
+  }
+}`,
+
+a41:`@keyframes elastic {
+  30% { transform: scaleX(1.3); }
+  55% { transform: scaleX(.8); }
+  75% { transform: scaleX(1.1); }
+}`,
+
+a42:`@keyframes reveal {
+  from {
+    clip-path:
+      inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path:
+      inset(0 0 0 0);
+  }
+}`,
+
+a43:`@keyframes wipe {
+  from {
+    clip-path:
+      inset(100% 0 0 0);
+  }
+
+  to {
+    clip-path:
+      inset(0 0 0 0);
+  }
+}`,
+
+a44:`@keyframes neon {
+  50% {
+    text-shadow:
+      0 0 5px white,
+      0 0 15px #4de1ff,
+      0 0 35px #258dff;
+  }
+}`,
+
+a45:`@keyframes glitch {
+  20% {
+    transform:
+      translate(-4px,2px);
+  }
+
+  40% {
+    transform:
+      translate(4px,-2px);
+  }
+
+  60% {
+    transform:
+      translate(-2px,-3px);
+  }
+}`,
+
+a46:`@keyframes drop {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}`,
+
+a47:`@keyframes rise {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}`,
+
+a48:`@keyframes spiral {
+  50% {
+    transform:
+      rotate(180deg)
+      translateX(30px);
+  }
+
+  100% {
+    transform:
+      rotate(360deg)
+      translateX(0);
+  }
+}`,
+
+a49:`@keyframes pendulum2 {
+  0%,100% {
+    transform: rotate(-25deg);
+  }
+
+  50% {
+    transform: rotate(25deg);
+  }
+}`,
+
+a50:`@keyframes iceFreeze {
+  0% {
+    transform:
+      scale(.7)
+      rotate(-8deg);
+
+    opacity:0;
+    filter:blur(8px);
+  }
+
+  45% {
+    transform:
+      scale(1.1)
+      rotate(3deg);
+
+    opacity:1;
+    filter:blur(0);
+  }
+
+  100% {
+    transform:
+      scale(.95)
+      rotate(0);
+  }
+}
+
+.element {
+  animation:
+    iceFreeze 1.4s ease;
+}`
+
+};
+
+/* =========================
+   CREATE CARDS
+========================= */
+
+const grid=document.getElementById("grid");
+
+function render(filter="all"){
+
+  grid.innerHTML="";
+
+  animations.forEach((a,i)=>{
+
+    if(filter!=="all" && a[3]!==filter)return;
+
+    const card=document.createElement("article");
+
+    card.className="card";
+
+    card.innerHTML=`
+
+      <div class="preview">
+
+        <div class="demo anim ${a[2]}">
+          ICE
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="number">
+          ANIMATION ${String(i+1).padStart(2,"0")}
+        </div>
+
+        <h3>${a[0]}</h3>
+
+        <p>${a[1]}</p>
+
+        <div class="card-buttons">
+
+          <button
+            onclick="viewCode(${i})">
+            View Code
+          </button>
+
+          <button
+            onclick="replay(this)">
+            Replay
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+}
+
+render();
+
+/* =========================
+   FILTERS
+========================= */
+
+document.querySelectorAll(".filter").forEach(btn=>{
+
+  btn.addEventListener("click",()=>{
+
+    document
+      .querySelectorAll(".filter")
+      .forEach(x=>x.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    render(btn.dataset.filter);
+
+  });
+
 });
 
-/* ---------------- CODE MODAL ---------------- */
+/* =========================
+   REPLAY
+========================= */
 
-const iceCode = `
-.cube {
-    width:55px;
-    height:55px;
+function replay(button){
 
-    background:
-        linear-gradient(
-            135deg,
-            #d9faff,
-            #3faaff
-        );
+  const demo=
+    button
+      .closest(".card")
+      .querySelector(".demo");
 
-    border:1px solid white;
+  demo.classList.remove("anim");
 
-    animation:
-        float 5s ease-in-out infinite;
+  void demo.offsetWidth;
+
+  demo.classList.add("anim");
+
 }
 
-@keyframes float {
+/* =========================
+   MODAL
+========================= */
 
-    50% {
-        transform:
-            translateY(-30px)
-            rotate(80deg);
-    }
-}
-`;
+let currentCode="";
 
-const waveCode = `
-.wave {
-    width:200%;
-    height:100px;
+function viewCode(index){
 
-    border-top:
-        4px solid #72dcff;
+  const a=animations[index];
 
-    border-radius:50%;
+  document.getElementById("modalNumber").textContent=
+    "ANIMATION "+String(index+1).padStart(2,"0");
 
-    animation:
-        wave 4s linear infinite;
-}
+  document.getElementById("modalTitle").textContent=
+    a[0];
 
-@keyframes wave {
+  const demo=document.getElementById("modalDemo");
 
-    to {
-        transform:
-            translateX(30%);
-    }
-}
-`;
+  demo.className="demo anim "+a[2];
 
-const crystalCode = `
-.crystal {
+  demo.textContent="ICE";
 
-    width:15px;
-    height:45px;
+  currentCode=codeMap[a[2]];
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #b7f5ff,
-            transparent
-        );
+  document.getElementById("code").textContent=
+    currentCode;
 
-    animation:
-        spin 4s linear infinite;
-}
-`;
+  document
+    .getElementById("modal")
+    .classList.add("open");
 
-const particleCode = `
-.particle {
-
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:#9deeff;
-
-    box-shadow:
-        0 0 12px #66dfff;
-
-    animation:
-        move 4s infinite;
-}
-`;
-
-const bubbleCode = `
-.bubble {
-
-    border:
-        1px solid #baf3ff;
-
-    border-radius:50%;
-
-    animation:
-        rise 5s linear infinite;
-}
-
-@keyframes rise {
-
-    to {
-        transform:
-            translateY(-300px);
-
-        opacity:0;
-    }
-}
-`;
-
-const penguinCode = `
-.penguin {
-
-    animation:
-        float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-
-    50% {
-        transform:
-            translateY(-18px)
-            rotate(2deg);
-    }
-}
-`;
-
-let currentCode = "";
-
-function showCode(title, code){
-
-    document
-        .getElementById("modal")
-        .classList.add("active");
-
-    document
-        .getElementById("modalTitle")
-        .textContent = title;
-
-    document
-        .getElementById("codeBox")
-        .textContent = code;
-
-    currentCode = code;
 }
 
 function closeModal(){
 
-    document
-        .getElementById("modal")
-        .classList.remove("active");
+  document
+    .getElementById("modal")
+    .classList.remove("open");
+
 }
 
 async function copyCode(){
 
-    await navigator.clipboard.writeText(currentCode);
+  await navigator.clipboard.writeText(currentCode);
 
-    const btn =
-        document.querySelector(".modal-box .primary");
+  const btn=document.querySelector(".copy");
 
-    btn.textContent = "Copied! ❄️";
+  btn.textContent="✅ Copied!";
 
-    setTimeout(()=>{
-        btn.textContent = "Copy Code 📋";
-    },1500);
+  setTimeout(()=>{
+    btn.textContent="📋 Copy Code";
+  },1500);
+
 }
 
-document
-    .getElementById("modal")
-    .addEventListener("click",(e)=>{
+document.getElementById("modal")
+.addEventListener("click",e=>{
 
-        if(e.target.id === "modal"){
-            closeModal();
-        }
+  if(e.target.id==="modal"){
+    closeModal();
+  }
 
-    });
+});
+
+document.addEventListener("keydown",e=>{
+
+  if(e.key==="Escape"){
+    closeModal();
+  }
+
+});
 
 </script>
 
